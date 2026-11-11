@@ -6,28 +6,13 @@ Use these skills to design and integrate WorkoPilot features in your own project
 
 ## Install in your project
 
-You need Git and a GitHub account with **read access to this repository**. Open a terminal at the **root of your own application project** and run one of the following command blocks. It clones the repository into a temporary directory, then copies both skills into your project's `.agents/skills/`, including their scripts, API references, and examples. These commands are for a first installation.
+Run this command from the root of your application project. You need Node.js (including npx), Git, and a GitHub SSH identity with read access to this repository.
 
-**macOS / Linux**
-
-```bash
-src="$(mktemp -d)" &&
-git clone --depth 1 https://github.com/workopilot/workopilot-internal-skills.git "$src" &&
-mkdir -p .agents/skills &&
-cp -R "$src/skills/wk-setup" "$src/skills/wk-api" .agents/skills/
+```sh
+npx skills add git@github.com:workopilot/workopilot-internal-skills.git --skill wk-setup --skill wk-api --agent codex -y
 ```
 
-**Windows PowerShell**
-
-```powershell
-$src = Join-Path ([IO.Path]::GetTempPath()) ([guid]::NewGuid().ToString())
-git clone --depth 1 https://github.com/workopilot/workopilot-internal-skills.git $src
-if ($LASTEXITCODE -ne 0) { throw "Git clone failed." }
-New-Item -ItemType Directory -Force .agents/skills | Out-Null
-Copy-Item "$src/skills/wk-setup", "$src/skills/wk-api" -Destination .agents/skills -Recurse -ErrorAction Stop
-```
-
-To install just one skill, keep only its source directory in the copy command. Verify that the selected skill has a `.agents/skills/wk-setup/SKILL.md` or `.agents/skills/wk-api/SKILL.md` file. Open your application project in Codex, start a new chat, and invoke the skill with `$wk-setup` or `$wk-api`. For another AI tool, use its project skill directory or ask the agent to read the corresponding `SKILL.md` file directly.
+To install just one skill, keep only its `--skill wk-setup` or `--skill wk-api` option. The installer places the selected skills in your project's `.agents/skills/`. Open the project in Codex, start a new chat, and enter `$wk-setup` or `$wk-api`. For another AI tool, choose its `--agent` identifier from the [Skills CLI documentation](https://github.com/vercel-labs/skills).
 
 ## Which skill to use
 

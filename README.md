@@ -6,28 +6,13 @@
 
 ## 安装到项目
 
-准备好 Git，并使用**对本仓库有读取权限**的 GitHub 账号。打开终端，进入**你自己的业务项目根目录**，选择下面一组命令。命令会把仓库克隆到临时目录，再把两个完整技能复制到项目的 `.agents/skills/`，包括脚本、接口文档和示例。以下命令用于首次安装。
+在自己的业务项目根目录运行以下命令。需要 Node.js（含 npx）、Git，以及有本仓库读取权限的 GitHub SSH 身份。
 
-**macOS / Linux**
-
-```bash
-src="$(mktemp -d)" &&
-git clone --depth 1 https://github.com/workopilot/workopilot-internal-skills.git "$src" &&
-mkdir -p .agents/skills &&
-cp -R "$src/skills/wk-setup" "$src/skills/wk-api" .agents/skills/
+```sh
+npx skills add git@github.com:workopilot/workopilot-internal-skills.git --skill wk-setup --skill wk-api --agent codex -y
 ```
 
-**Windows PowerShell**
-
-```powershell
-$src = Join-Path ([IO.Path]::GetTempPath()) ([guid]::NewGuid().ToString())
-git clone --depth 1 https://github.com/workopilot/workopilot-internal-skills.git $src
-if ($LASTEXITCODE -ne 0) { throw "Git clone failed." }
-New-Item -ItemType Directory -Force .agents/skills | Out-Null
-Copy-Item "$src/skills/wk-setup", "$src/skills/wk-api" -Destination .agents/skills -Recurse -ErrorAction Stop
-```
-
-只需要一个技能时，复制命令中只保留对应的源目录。安装后确认所选技能的 `.agents/skills/wk-setup/SKILL.md` 或 `.agents/skills/wk-api/SKILL.md` 存在。在 Codex 中打开这个业务项目，新建对话，输入 `$wk-setup` 或 `$wk-api` 调用。其他 AI 工具可按其项目技能目录约定安装，或直接让它读取对应的 `SKILL.md`。
+只装一个时，保留对应的 `--skill wk-setup` 或 `--skill wk-api`。安装器会把所选技能放到当前项目的 `.agents/skills/`。用 Codex 打开项目，新建对话后输入 `$wk-setup` 或 `$wk-api`。其他 AI 工具可按 [Skills CLI 文档](https://github.com/vercel-labs/skills)选择对应的 `--agent`。
 
 ## 什么时候用哪个
 
