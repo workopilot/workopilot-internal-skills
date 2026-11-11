@@ -1,0 +1,49 @@
+{
+  "RequestId": 202607140001,
+  "IsAudit": false,
+  "Method": "API",
+  "BillHeader": {
+    "BillId": "TRAVEL-20260714-001",
+    "BillCode": "BX202607140001",
+    "AppCode": "YONYOU",
+    "SourceType": 2,
+    "BillTypeCode": "TRAVEL_EXPENSE",
+    "TotalAmount": 3580.5,
+    "RequestUserId": "EMP001",
+    "CompanyId": "COMP001",
+    "SubmitTime": "2026-07-14 10:30:00",
+    "ExtendJsonData": {
+      "employeeName": "张三",
+      "department": "销售部",
+      "travelPurpose": "客户拜访",
+      "fromCity": "上海",
+      "toCity": "北京",
+      "projectCode": "PRJ-2026-001"
+    }
+  },
+  "BillDetails": [
+    {
+      "LineNo": "1",
+      "ItemCode": "TRAFFIC",
+      "Amount": 1280.5,
+      "ExtendJsonData": {
+        "expenseType": "交通费",
+        "transport": "高铁",
+        "from": "上海虹桥",
+        "to": "北京南"
+      }
+    },
+    {
+      "LineNo": "2",
+      "ItemCode": "HOTEL",
+      "Amount": 2300,
+      "ExtendJsonData": {
+        "expenseType": "住宿费",
+        "city": "北京",
+        "nights": 2,
+        "hotelName": "北京示例酒店"
+      }
+    }
+  ],
+  "BillAttachments": []
+}
