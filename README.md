@@ -9,10 +9,10 @@
 在自己的业务项目根目录运行以下命令。需要 Node.js（含 npx）、Git，以及有本仓库读取权限的 GitHub SSH 身份。
 
 ```sh
-npx skills add git@github.com:workopilot/workopilot-internal-skills.git --skill wk-setup --skill wk-api --agent codex -y
+npx skills add git@github.com:workopilot/workopilot-internal-skills.git --skill wk-setup --skill wk-api
 ```
 
-只装一个时，保留对应的 `--skill wk-setup` 或 `--skill wk-api`。安装器会把所选技能放到当前项目的 `.agents/skills/`。用 Codex 打开项目，新建对话后输入 `$wk-setup` 或 `$wk-api`。其他 AI 工具可按 [Skills CLI 文档](https://github.com/vercel-labs/skills)选择对应的 `--agent`。
+在终端中按安装器提示选择你使用的 Agent（如 Claude Code、Codex 或 Cursor）及项目级安装范围。要一次安装到 CLI 支持的全部 Agent，可在命令末尾加 `--agent '*'`。只装一个技能时，保留对应的 `--skill` 选项。安装后，在你的 Agent 中打开项目，直接发送下方对应技能的提示词。支持的 Agent 列表见 [Skills CLI 文档](https://github.com/vercel-labs/skills)。
 
 ## 什么时候用哪个
 
@@ -27,8 +27,8 @@ npx skills add git@github.com:workopilot/workopilot-internal-skills.git --skill 
 
 **wk-setup · 为测试租户准备合同摘要服务**
 
-> $wk-setup 在喔壳测试租户准备一个合同摘要 AI 服务，编码为 contract_summary，输入字段 text 是合同正文，输出为中文摘要。先检查执行环境和同编码服务；已有服务就核对输入输出，缺少时用环境中配置的实施 API Key 创建。完成后告诉我环境、实际 serviceCode、输入字段和一个测试请求。请勿在回复中输出凭据。
+> 使用 wk-setup 技能，在喔壳测试租户准备一个合同摘要 AI 服务，编码为 contract_summary，输入字段 text 是合同正文，输出为中文摘要。先检查执行环境和同编码服务；已有服务就核对输入输出，缺少时用环境中配置的实施 API Key 创建。完成后告诉我环境、实际 serviceCode、输入字段和一个测试请求。请勿在回复中输出凭据。
 
 **wk-api · 在第三方应用调用已有服务**
 
-> $wk-api 请在当前项目的合同详情页加一个“生成摘要”按钮。测试租户已配置 contract_summary，输入 text 取当前合同正文。先检查当前应用的环境配置、登录态和请求库，沿用已有封装，用当前用户 Token 同步调用该服务。点击后显示摘要，并处理加载、登录失效和业务失败。完成后说明如何在测试环境验证。
+> 使用 wk-api 技能，请在当前项目的合同详情页加一个“生成摘要”按钮。测试租户已配置 contract_summary，输入 text 取当前合同正文。先检查当前应用的环境配置、登录态和请求库，沿用已有封装，用当前用户 Token 同步调用该服务。点击后显示摘要，并处理加载、登录失效和业务失败。完成后说明如何在测试环境验证。
