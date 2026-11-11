@@ -1,0 +1,11 @@
+{
+  "title": "药品查询",
+  "menuKey": "drug-search",
+  "menuType": "ai-app",
+  "aiAppCode": "pharma-tools",
+  "aiMenuPath": "/drugs/search?status=active",
+  "displayMode": "card",
+  "icon": "lucide:search",
+  "sort": 10,
+  "isEnabled": true
+}

@@ -1,6 +1,6 @@
 ---
 name: wk-setup
-description: 喔壳业务设计与资源实施。用户要求在指定租户创建或复用 AI 服务、对话型或任务型数字员工，更新员工、注册 iframe 卡片、配置应用菜单，或梳理路由、场景推荐、消息通知的人工配置时，用 API Key 交付资源及标识。业务页面接入已有资源交给 wk-api。
+description: 喔壳业务设计与资源实施。使用 API Key 创建或复用 AI 服务及数字员工，更新员工，注册 iframe 卡片，将托管 AI 应用页面或第三方 iframe 配置为员工菜单，并指导路由、场景推荐和消息通知的人工配置。业务页面接入已有资源交给 wk-api。
 ---
 
 # 喔壳资源实施
@@ -56,7 +56,9 @@ py -3 scripts/register_iframe_card.py --base-url $env:WORKOPILOT_BASE_URL --conf
 py -3 scripts/configure_app_menu.py --base-url $env:WORKOPILOT_BASE_URL --employee-id 123 --action create --config menu.json
 ```
 
-更新已有菜单时用 --action update --menu-key 指定原菜单编码。卡片用于对话内展示，配置 url 和 triggerPrompt；菜单用 menuKey 和 iframeUrl 固定挂在员工入口。按本技能的[员工配置](references/digital-employee.md)、[卡片配置](references/iframe-skill-card.md)和[菜单配置](references/app-menu-iframe.md) 准备完整字段。执行后在目标员工验证更新值、卡片触发和菜单打开。
+**把已有 AI 应用页面挂到数字员工**。先创建或复用员工，取得返回的员工 ID。在目标租户的员工配置页“添加应用菜单”中确认已开通的 AI 应用和业务人员可访问的页面。复制[菜单示例](examples/ai-app-menu.json)，将 `aiAppCode` 和 `aiMenuPath` 换成实际编码与页面路由，用上面的 `configure_app_menu.py` 命令创建。每个页面调用一次。后端生成嵌入地址，由子应用 SDK 获取登录态。实施完成后用目标业务角色从员工菜单打开页面，交付员工 ID、菜单编码、应用编码和页面路径。
+
+第三方独立网页使用 `menuType: "iframe"` 和 `iframeUrl`。对话内按提示触发的卡片使用 `register_iframe_card.py`。更新已有菜单时用 `--action update --menu-key` 指定原编码，只传需要变更的字段。见[员工配置](references/digital-employee.md)、[卡片配置](references/iframe-skill-card.md)和[菜单接口、请求与响应示例](references/app-menu-iframe.md)。
 
 跨环境迁移员工、AI 服务以及维护快捷指令先在管理页面操作；在目标租户核对模型、关联技能、菜单地址、路由和访问权限，用目标环境的标识交付开发。
 
