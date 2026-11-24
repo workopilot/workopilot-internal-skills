@@ -45,6 +45,7 @@ description: 在第三方项目或喔壳 AI 应用中设计数字员工、业务
 | AI 服务调试 /api/aiagent/runtest | body.code === 200 且 body.data.Code === 0 | body.data.Data 或 body.data.TaskId |
 | 异步 AI 服务结果 /api/aiagent/task/result | body.code === 200 后判断 body.data.TaskStatusId | body.data.Output、body.data.ErrorMsg |
 | 任务型员工 POST /api/ai/robot/task-runs | HTTP 202 且 body.code === 200 | body.data.Id 是运行 ID，body.data.AssistantMessageId 是消息 ID |
+| 品牌/供应商 /api/mst/brands、/api/mst/suppliers | HTTP 200 且 body.code === 200 | 行/详情是 lowerCamelCase；ID 是字符串 |
 | .NET 分页 ApiResult | body.code === 200 | body.rows、body.total 与 data 同层 |
 
 .NET MVC 使用 Newtonsoft.Json 的 DefaultContractResolver 保留属性原名。ApiResult 定义了小写 code、msg、data、rows、total；多数业务 DTO 使用 PascalCase。显式 JSON 别名和匿名对象按接口示例读取，例如 HTML 成果的 data.revisionId、迁移包的 data.services。long 和非空 long? 输出十进制字符串，保留为字符串以免丢失精度。int、boolean 保持 JSON 原类型。动态 inputs 的键、模板参数、模型业务输出按目标配置原样传递。SSE 使用独立事件编码。
@@ -54,7 +55,9 @@ description: 在第三方项目或喔壳 AI 应用中设计数字员工、业务
 - [AI 服务执行、轮询与聊天 SSE](references/ai-runtime.md)
 - [任务型数字员工的创建、列表、详情、取消、重试与删除](references/task-runs.md)
 - [场景推荐、生成话术与草稿交接](references/recommendations.md)
-- [组织与商品、用户、创建/更新/取消个人待办、应用主动发送消息](references/token-apis.md)
+- [主数据接口总表：产品、公司、用户、部门、项目、合同的下拉、完整字段分页、全部记录与详情](references/master-data-queries.md)
+- [品牌与供应商：下拉、完整分页、详情、新增、更新、删除及版本冲突](references/brand-supplier.md)
+- [已有主数据候选、创建/更新/取消个人待办、应用主动发送消息](references/token-apis.md)
 - [PDF、文件上传、OCR、Excel、附件取数、智能审核、语音](references/files-audit.md)
 - [资源迁移、指令模板、HTML 成果与 Markdown 文档](references/resources.md)
 
